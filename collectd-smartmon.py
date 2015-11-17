@@ -1,4 +1,4 @@
-#!/usr/bin/env python -u
+#!/usr/bin/env python
 import re
 import subprocess
 import os
@@ -54,9 +54,9 @@ def main():
     while True:
         for dev in args.DEV:
             for attr in SmartDevice('sda').attributes():
-                print('PUTVAL "{hostname}/smart/{dev}/{attr}"'
+                print('PUTVAL "{hostname}/smart/{dev}/{id}_{attr}"'
                       ' interval={interval} N:{value}'
-                      .format(hostname=hostname, dev=dev,
+                      .format(hostname=hostname, dev=dev, id=attr['id'],
                               attr=attr.get('name'), interval=interval,
                               value=attr['raw_value']))
         time.sleep(interval)
