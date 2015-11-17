@@ -46,7 +46,7 @@ def main():
                         default=os.environ.get('COLLECTD_HOSTNAME'))
     parser.add_argument('-i', '--interval', type=int,
                         help='override interval provided by collectd',
-                        default=int(os.environ.get('COLLECTD_INTERVAL', 300)))
+                        default=int(float(os.environ.get('COLLECTD_INTERVAL', 300))))
     args = parser.parse_args()
 
     hostname = args.hostname or subprocess.check_output(['hostname', '-f']).strip()
