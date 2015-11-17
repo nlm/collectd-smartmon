@@ -28,6 +28,7 @@ add to sudoers file:
 
 collectd config file:
 
+    LoadPlugin exec
     <Plugin exec>
       Exec "collectd-smartmon" "/usr/local/bin/collectd-smartmon.py" "sda" "sdb" "sdc" "sdd"
     </Plugin>
