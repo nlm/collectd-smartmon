@@ -31,11 +31,11 @@ class SmartDevice(object):
             yield res.groupdict()
 
 
-def check_dev(dev):
+def dev_exists(dev):
     return os.path.exists('/dev/{0}'.format(dev))
 
 def get_filelist(dirname, pattern):
-    return set([f for f in os.listdir(dirname) if re.match(pattern, f)])
+    return [f for f in os.listdir(dirname) if re.match(pattern, f)]
 
 def expand_devices(devlist):
     expanded_devlist = []
@@ -49,7 +49,7 @@ def expand_devices(devlist):
 def smartmon_loop(devices, hostname, interval):
     while True:
         for dev in devices:
-            if check_dev(dev):
+            if dev_exists(dev):
                 for attr in SmartDevice(dev).attributes():
                     print('PUTVAL "{hostname}/smart-{dev}'
                           '/absolute-{id}_{attr}"'
@@ -86,7 +86,7 @@ def main():
 
     if not args.dont_check_devs:
         for dev in devices:
-            if not check_dev(dev):
+            if not dev_exists(dev):
                 parser.error('device "/dev/{0}" does not exist'.format(dev))
 
     try:
