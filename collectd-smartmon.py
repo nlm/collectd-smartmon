@@ -56,7 +56,7 @@ def smartmon_loop(devices, hostname, interval):
                           ' interval={interval} N:{value}'
                           .format(hostname=hostname, dev=dev, id=attr['id'],
                                   attr=attr.get('name'), interval=interval,
-                                  value=attr['raw_value']))
+                                  value=attr['value']))
         time.sleep(interval)
 
 def main():
