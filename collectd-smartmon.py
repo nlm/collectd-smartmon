@@ -52,11 +52,13 @@ def smartmon_loop(devices, hostname, interval):
             if dev_exists(dev):
                 for attr in SmartDevice(dev).attributes():
                     print('PUTVAL "{hostname}/smart-{dev}'
-                          '/absolute-{id}_{attr}"'
-                          ' interval={interval} N:{value}'
-                          .format(hostname=hostname, dev=dev, id=attr['id'],
-                                  attr=attr.get('name'), interval=interval,
-                                  value=attr['value']))
+                          '/absolute-{attr_id:d}_{attr_name}"'
+                          ' interval={interval:d} N:{value:d}'
+                          .format(hostname=hostname, dev=dev,
+                                  attr_id=int(attr['id']),
+                                  attr_name=attr.get('name'),
+                                  interval=int(interval),
+                                  value=int(attr['value'])))
         time.sleep(interval)
 
 def main():
