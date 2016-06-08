@@ -21,7 +21,7 @@ class SmartDevice(object):
         except OSError as err:
             sys.exit('unable to run smartctl: {0}'.format(err))
         for line in out.split("\n"):
-            res = re.match('(?P<id>\d+)\s+(?P<name>\w+)\s+'
+            res = re.match('\s*(?P<id>\d+)\s+(?P<name>[\w-]+)\s+'
                            '(?P<flags>[POSRCK-]{6})\s+'
                            '(?P<value>\d+)\s+(?P<worst>\d+)\s+'
                            '(?P<thres>\d+)\s+(?P<fail>[\w-]+)\s+'
@@ -52,7 +52,7 @@ def smartmon_loop(devices, hostname, interval):
             if dev_exists(dev):
                 for attr in SmartDevice(dev).attributes():
                     print('PUTVAL "{hostname}/smart-{dev}'
-                          '/absolute-{attr_id:d}_{attr_name}"'
+                          '/absolute-{attr_id:03d}_{attr_name}"'
                           ' interval={interval:d} N:{value:d}'
                           .format(hostname=hostname, dev=dev,
                                   attr_id=int(attr['id']),
