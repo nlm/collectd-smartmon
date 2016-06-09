@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function, absolute_import
 import re
 import subprocess
 import os
@@ -18,8 +19,9 @@ class SmartDevice(object):
     def attributes(self):
         try:
             out = subprocess.check_output(self.attrcmd)
-        except OSError as err:
-            sys.exit('unable to run smartctl: {0}'.format(err))
+        except (OSError, subprocess.CalledProcessError) as err:
+            print('Error running command: {0}'.format(err), file=sys.stderr)
+            return
         for line in out.split("\n"):
             res = re.match('\s*(?P<id>\d+)\s+(?P<name>[\w-]+)\s+'
                            '(?P<flags>[POSRCK-]{6})\s+'
