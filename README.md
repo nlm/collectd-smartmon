@@ -18,7 +18,7 @@ clone repo and copy script:
     cd collectd-smartmon
     cp collectd-smartmon.py /usr/local/bin
 
-add user to system:
+add new system user for privilege separation:
 
     useradd -r collectd-smartmon
 
@@ -26,7 +26,7 @@ add to sudoers file:
 
     collectd-smartmon  ALL = (ALL) NOPASSWD: /usr/sbin/smartctl -f brief -A /dev/sd[a-z]
 
-collectd config file:
+add snippet to collectd config file:
 
     LoadPlugin exec
     <Plugin exec>
