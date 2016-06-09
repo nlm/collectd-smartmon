@@ -1,6 +1,7 @@
 collectd-smartmon
 =================
-a tool to report smart attributes raw values from collectd
+a tool to collect local disks smart attributes raw values
+using collectd plain-text protocol
 
 requirements
 ------------
